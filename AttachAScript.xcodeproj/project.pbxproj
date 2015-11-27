@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -70,7 +70,7 @@
 		5282D03309CB87ED00E2969C /* AEDescUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEDescUtils.h; sourceTree = "<group>"; };
 		5282D03409CB87ED00E2969C /* AEDescUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEDescUtils.m; sourceTree = "<group>"; };
 		5533996707EF83D900C2E088 /* AttachedScripts.applescript */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.applescript; path = AttachedScripts.applescript; sourceTree = "<group>"; };
-		5533996807EF83D900C2E088 /* AttachedScripts.scpt */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.scpt; path = AttachedScripts.scpt; sourceTree = "<group>"; };
+		5533996807EF83D900C2E088 /* AttachedScripts.scpt */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = file; path = AttachedScripts.scpt; sourceTree = "<group>"; };
 		5533999907EF8D7600C2E088 /* MyController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MyController.h; sourceTree = "<group>"; };
 		5533999A07EF8D7600C2E088 /* MyController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MyController.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -234,10 +234,19 @@
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = 5231525809CA2A2900910008 /* Build configuration list for PBXProject "AttachAScript" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* iTunesRemote */;
 			projectDirPath = "";
+			projectRoot = "";
 			targets = (
 				8D1107260486CEB800E47090 /* AttachAScript */,
 			);
@@ -320,104 +329,53 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		5231525509CA2A2900910008 /* Development */ = {
+		5231525509CA2A2900910008 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
-				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AttachAScript_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Applications";
-				PREBINDING = NO;
 				PRODUCT_NAME = AttachAScript;
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
 			};
-			name = Development;
+			name = Debug;
 		};
-		5231525609CA2A2900910008 /* Deployment */ = {
+		5231525609CA2A2900910008 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
-				COPY_PHASE_STRIP = YES;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AttachAScript_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Applications";
-				PREBINDING = NO;
 				PRODUCT_NAME = AttachAScript;
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
 			};
-			name = Deployment;
+			name = Release;
 		};
-		5231525709CA2A2900910008 /* Default */ = {
+		5231525909CA2A2900910008 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = AttachAScript_Prefix.pch;
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Applications";
-				PREBINDING = NO;
-				PRODUCT_NAME = AttachAScript;
-				WRAPPER_EXTENSION = app;
-				ZERO_LINK = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				SDKROOT = macosx;
 			};
-			name = Default;
+			name = Debug;
 		};
-		5231525909CA2A2900910008 /* Development */ = {
+		5231525A09CA2A2900910008 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				SDKROOT = macosx;
 			};
-			name = Development;
-		};
-		5231525A09CA2A2900910008 /* Deployment */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
-			};
-			name = Deployment;
-		};
-		5231525B09CA2A2900910008 /* Default */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
-			};
-			name = Default;
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -425,22 +383,20 @@
 		5231525409CA2A2900910008 /* Build configuration list for PBXNativeTarget "AttachAScript" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5231525509CA2A2900910008 /* Development */,
-				5231525609CA2A2900910008 /* Deployment */,
-				5231525709CA2A2900910008 /* Default */,
+				5231525509CA2A2900910008 /* Debug */,
+				5231525609CA2A2900910008 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Default;
+			defaultConfigurationName = Debug;
 		};
 		5231525809CA2A2900910008 /* Build configuration list for PBXProject "AttachAScript" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5231525909CA2A2900910008 /* Development */,
-				5231525A09CA2A2900910008 /* Deployment */,
-				5231525B09CA2A2900910008 /* Default */,
+				5231525909CA2A2900910008 /* Debug */,
+				5231525A09CA2A2900910008 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Default;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

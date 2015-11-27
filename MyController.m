@@ -1,70 +1,49 @@
 /*
-
-File: MyController.m
-
-Abstract: Main controller file for the AttachAScript sample.
-
-Version: 1.0
-
-(c) Copyright 2006 Apple Computer, Inc. All rights reserved.
-
-IMPORTANT:  This Apple software is supplied to 
-you by Apple Computer, Inc. ("Apple") in 
-consideration of your agreement to the following 
-terms, and your use, installation, modification 
-or redistribution of this Apple software 
-constitutes acceptance of these terms.  If you do 
-not agree with these terms, please do not use, 
-install, modify or redistribute this Apple 
-software.
-
-In consideration of your agreement to abide by 
-the following terms, and subject to these terms, 
-Apple grants you a personal, non-exclusive 
-license, under Apple's copyrights in this 
-original Apple software (the "Apple Software"), 
-to use, reproduce, modify and redistribute the 
-Apple Software, with or without modifications, in 
-source and/or binary forms; provided that if you 
-redistribute the Apple Software in its entirety 
-and without modifications, you must retain this 
-notice and the following text and disclaimers in 
-all such redistributions of the Apple Software. 
-Neither the name, trademarks, service marks or 
-logos of Apple Computer, Inc. may be used to 
-endorse or promote products derived from the 
-Apple Software without specific prior written 
-permission from Apple.  Except as expressly 
-stated in this notice, no other rights or 
-licenses, express or implied, are granted by 
-Apple herein, including but not limited to any 
-patent rights that may be infringed by your 
-derivative works or by other works in which the 
-Apple Software may be incorporated.
-
-The Apple Software is provided by Apple on an "AS 
-IS" basis.  APPLE MAKES NO WARRANTIES, EXPRESS OR 
-IMPLIED, INCLUDING WITHOUT LIMITATION THE IMPLIED 
-WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY 
-AND FITNESS FOR A PARTICULAR PURPOSE, REGARDING 
-THE APPLE SOFTWARE OR ITS USE AND OPERATION ALONE 
-OR IN COMBINATION WITH YOUR PRODUCTS.
-
-IN NO EVENT SHALL APPLE BE LIABLE FOR ANY 
-SPECIAL, INDIRECT, INCIDENTAL OR CONSEQUENTIAL 
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
-PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS 
-OF USE, DATA, OR PROFITS; OR BUSINESS 
-INTERRUPTION) ARISING IN ANY WAY OUT OF THE USE, 
-REPRODUCTION, MODIFICATION AND/OR DISTRIBUTION OF 
-THE APPLE SOFTWARE, HOWEVER CAUSED AND WHETHER 
-UNDER THEORY OF CONTRACT, TORT (INCLUDING 
-NEGLIGENCE), STRICT LIABILITY OR OTHERWISE, EVEN 
-IF APPLE HAS BEEN ADVISED OF THE POSSIBILITY OF 
-SUCH DAMAGE.
-
-*/
-
+     File: MyController.m 
+ Abstract: Main controller's header file for the AttachAScript sample. 
+  Version: 1.1 
+  
+ Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple 
+ Inc. ("Apple") in consideration of your agreement to the following 
+ terms, and your use, installation, modification or redistribution of 
+ this Apple software constitutes acceptance of these terms.  If you do 
+ not agree with these terms, please do not use, install, modify or 
+ redistribute this Apple software. 
+  
+ In consideration of your agreement to abide by the following terms, and 
+ subject to these terms, Apple grants you a personal, non-exclusive 
+ license, under Apple's copyrights in this original Apple software (the 
+ "Apple Software"), to use, reproduce, modify and redistribute the Apple 
+ Software, with or without modifications, in source and/or binary forms; 
+ provided that if you redistribute the Apple Software in its entirety and 
+ without modifications, you must retain this notice and the following 
+ text and disclaimers in all such redistributions of the Apple Software. 
+ Neither the name, trademarks, service marks or logos of Apple Inc. may 
+ be used to endorse or promote products derived from the Apple Software 
+ without specific prior written permission from Apple.  Except as 
+ expressly stated in this notice, no other rights or licenses, express or 
+ implied, are granted by Apple herein, including but not limited to any 
+ patent rights that may be infringed by your derivative works or by other 
+ works in which the Apple Software may be incorporated. 
+  
+ The Apple Software is provided by Apple on an "AS IS" basis.  APPLE 
+ MAKES NO WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION 
+ THE IMPLIED WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY AND FITNESS 
+ FOR A PARTICULAR PURPOSE, REGARDING THE APPLE SOFTWARE OR ITS USE AND 
+ OPERATION ALONE OR IN COMBINATION WITH YOUR PRODUCTS. 
+  
+ IN NO EVENT SHALL APPLE BE LIABLE FOR ANY SPECIAL, INDIRECT, INCIDENTAL 
+ OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
+ SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+ INTERRUPTION) ARISING IN ANY WAY OUT OF THE USE, REPRODUCTION, 
+ MODIFICATION AND/OR DISTRIBUTION OF THE APPLE SOFTWARE, HOWEVER CAUSED 
+ AND WHETHER UNDER THEORY OF CONTRACT, TORT (INCLUDING NEGLIGENCE), 
+ STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE 
+ POSSIBILITY OF SUCH DAMAGE. 
+  
+ Copyright (C) 2011 Apple Inc. All Rights Reserved. 
+  
+ */
 
 
 #import <Carbon/Carbon.h>
@@ -78,9 +57,6 @@ SUCH DAMAGE.
 @implementation MyController
 
 
-
-
-
 	/* awakeFromNib is called after our window has been completely
 	loaded from disk and it is ready to use.  We do all of our initialization
 	steps in this method. */
@@ -90,42 +66,35 @@ SUCH DAMAGE.
 	NSURL* scriptURL;
 	NSAppleEventDescriptor *playLists;
 	NSString* playerState;
-	NSArray* localImagesTable;
-	
 	
 		/* get the images we're using in our buttons, store them in a table */
-	localImagesTable = [NSArray arrayWithObjects:
-		[[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"shuffleoff" ofType:@"png"]],
-		[[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"shuffleon" ofType:@"png"]],
-		[[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"playp" ofType:@"png"]],
-		[[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"pausep" ofType:@"png"]],
-		[[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"repeatoff" ofType:@"png"]],
-		[[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"repeaton" ofType:@"png"]],
-		[[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"repeatone" ofType:@"png"]],
-		nil];
-	[self setImagesTable:localImagesTable];
-
+	self.imagesTable = [NSArray arrayWithObjects:
+		[NSImage imageNamed:@"shuffleoff.png"],
+		[NSImage imageNamed:@"shuffleon.png"],
+		[NSImage imageNamed:@"playp.png"],
+		[NSImage imageNamed:@"pausep.png"],
+		[NSImage imageNamed:@"repeatoff.png"],
+		[NSImage imageNamed:@"repeaton.png"],
+		[NSImage imageNamed:@"repeatone.png"],
+                        nil];
 
 		/* load the gong sound */
-	[self setGongSound: [[NSSound alloc] initWithContentsOfFile:[bundle pathForResource:@"gong" ofType:@"aif"]
-			byReference:NO]];
-
+	self.gongSound = [[[NSSound alloc] initWithContentsOfFile:[bundle pathForResource:@"gong" ofType:@"aif"]
+			byReference:NO] autorelease];
 
 		/* load the compiled version of our AppleScript from the file AttachedScripts.scpt
 		in the resources folder.  This script contains all of the handlers we will
 		be using in this application.  */
-	scriptURL = [[NSURL alloc] initFileURLWithPath:[bundle pathForResource:@"AttachedScripts" ofType:@"scpt"]];
-	[self setMyScript: [[TAttachedScripts alloc] init]];
-
+	self.myScript = [[[TAttachedScripts alloc] init] autorelease];
 	
 		/* call the HookUpToRemoteMachine handler in our compiled AppleScript to
 		allow the user to select a remote machine running the iTunes program we
 		would like to control.  Remote Apple Events must be enabled on the remote
 		machine. */
-	if ( nil == [self myScript] ) {
+	if ( nil == self.myScript ) {
 	
-		/* no connection to remot machine.  If there was an error in the AppleScript
-		then callScript will have already reported it so here we just quit. */
+            /* no connection to remot machine.  If there was an error in the AppleScript
+            then callScript will have already reported it so here we just quit. */
 		[NSApp terminate:self];
 		
 	} else {
@@ -134,8 +103,8 @@ SUCH DAMAGE.
 		[self updatePlayerStatus];
 		
 			/* get the list of playlists on the remote machine */
-		[self setPlaylistItems: [[[self myScript] callHandler:@"GetPlaylistListing" withParameters:nil]
-			listOfStringsToSortedArray]];
+		self.playlistItems = [[[self myScript] callHandler:@"GetPlaylistListing" withParameters:nil]
+			listOfStringsToSortedArray];
 		
 			/* set up the play list object */
 		[playlists setDataSource:self];
@@ -144,7 +113,7 @@ SUCH DAMAGE.
 		[playlists setAction:@selector(clickNewPlaylist)]; /* single clicks select a playlist to view */
 		
 			/* set up the track list object */
-		tracklistItems = nil;
+		self.tracklistItems = nil;
 		[tracklist setDataSource:self];
 		[tracklist setTarget:self];
 		[tracklist setDelegate:self];
@@ -173,18 +142,7 @@ SUCH DAMAGE.
 	because it does not work with Apple event descriptor records.  we store
 	a reference to our compiled AppleScript that we loaded from the file
 	AttachedScripts.scpt in theScript slot. */
-- (TAttachedScripts *)myScript {
-    return [[myScript retain] autorelease];
-}
-
-- (void)setMyScript:(TAttachedScripts *)value {
-    if (myScript != value) {
-        [myScript release];
-        myScript = value /* [value copy] */;
-    }
-}
-
-
+@synthesize myScript;
 
 
 	/* updatePlayerStatus communicates with the remote iTunes application and
@@ -245,17 +203,12 @@ SUCH DAMAGE.
 }
 
 
-
-
 	/* tableView:shouldEditTableColumn:row: is called because we have set our object
 	to be the delegate for both of the NSTable views we have in our window.  This
 	method always returns NO and so turns off editing for all of our cells. */
-- (BOOL)tableView:(NSTableView *)tableView shouldEditTableColumn:(NSTableColumn *)tableColumn
-		row:(int)row {
+- (BOOL)tableView:(NSTableView *)aTableView shouldEditTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
 	return NO;
 }
-
-
 
 
 	/* numberOfRowsInTableView: is called because we have set our object as the
@@ -263,15 +216,13 @@ SUCH DAMAGE.
 	we check which table we are being asked about and then we return the number
 	of rows in that table.  */
 - (int)numberOfRowsInTableView:(NSTableView *)tableView {
-    if ((id) tableView == (id) playlists) {
-		return [[self playlistItems] count];
-	} else if ((id) tableView == (id) tracklist && tracklistItems != nil) {
-		return [[self tracklistItems] count];
+    if (tableView == playlists) {
+		return [self.playlistItems count];
+	} else if (tableView == tracklist && self.tracklistItems != nil) {
+		return [self.tracklistItems count];
 	}
 	return 0;
 }
-
-
 
 
 	/* tableView:objectValueForTableColumn:row: is called because we have set
@@ -280,24 +231,22 @@ SUCH DAMAGE.
 	and then we return the contents of the cell being asked for.  */
 - (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn
 		row:(int)row {
-    if ((id) tableView == (id) playlists) {
+    if (tableView == playlists) {
 	
 			/* playlistItems is an Apple event descriptor containing a list
 			of Apple event descriptors containing strings.  The list is
 			indexed starting at 1... */
-		return [playlistItems objectAtIndex:row];
+		return [self.playlistItems objectAtIndex:row];
 		
-	} else if ((id) tableView == (id) tracklist && tracklistItems != nil) {
+	} else if (tableView == tracklist && tracklistItems != nil) {
 	
 			/* tracklistItems is an Apple event descriptor containing a list
 			of Apple event descriptors containing strings.  The list is
 			indexed starting at 1... */
-		return [tracklistItems objectAtIndex:row];
+		return [self.tracklistItems objectAtIndex:row];
 	}
 	return @""; /* default string */
 }
-
-
 
 
 	/* clickNewPlaylist is called whenever a single click is made on the list
@@ -313,25 +262,23 @@ SUCH DAMAGE.
 		/* if we are currently viewing a list of tracks, delete that list */
 	
 		/* call the remote host to obtain a list of tracks in the named playlist. */
-	playlistName = [[self playlistItems] objectAtIndex:[playlists clickedRow]];
-	[self setTracklistItems:[[self myScript] getTracksForPlaylist:playlistName]];
+	playlistName = [self.playlistItems objectAtIndex:[playlists clickedRow]];
+	self.tracklistItems = [self.myScript getTracksForPlaylist:playlistName];
 		
 		/* display the shuffle setting for the selected playlist */
-	shuffleSetting = [[self myScript] getShuffleForPlaylist:playlistName];
+	shuffleSetting = [self.myScript getShuffleForPlaylist:playlistName];
 	if (shuffleSetting == 1) {
-		[shufflebutton setImage:[[self imagesTable] objectAtIndex:kShuffleOnImage]];
+		[shufflebutton setImage:[self.imagesTable objectAtIndex:kShuffleOnImage]];
 	} else {
-		[shufflebutton setImage:[[self imagesTable] objectAtIndex:kShuffleOffImage]];
+		[shufflebutton setImage:[self.imagesTable objectAtIndex:kShuffleOffImage]];
 	}
-	repeatSetting = [[self myScript] getRepeatForPlaylist:playlistName];
-	[repeatbutton setImage:[[self imagesTable] objectAtIndex:(kRepeatOffImage + repeatSetting)]];
+	repeatSetting = [self.myScript getRepeatForPlaylist:playlistName];
+	[repeatbutton setImage:[self.imagesTable objectAtIndex:(kRepeatOffImage + repeatSetting)]];
 				
 		/* enable our repeat and shuffle buttons */
 	[repeatbutton setEnabled:YES];
 	[shufflebutton setEnabled:YES];
 }
-
-
 
 
 	/* clickTrackToPlay is called whenever a double click is received by the list
@@ -345,13 +292,13 @@ SUCH DAMAGE.
 	if ( playlistRow != -1 && tracklistRow != -1 ) {
 			
 			/* get the name of the selected playlist */
-		NSString* playlistName = [[self playlistItems] objectAtIndex:playlistRow];
+		NSString* playlistName = [self.playlistItems objectAtIndex:playlistRow];
 		
 			/* get the name of the selected track */
-		NSString* trackName = [[self tracklistItems] objectAtIndex:tracklistRow];
+		NSString* trackName = [self.tracklistItems objectAtIndex:tracklistRow];
 		
 			/* ask the remote iTunes app to play the selected track. */
-		[[self myScript] playTrack:trackName fromPlaylist: playlistName];
+		[self.myScript playTrack:trackName fromPlaylist: playlistName];
 		
 			/* update our user interface to display the new status of the player */
 		[self updatePlayerStatus];
@@ -359,29 +306,14 @@ SUCH DAMAGE.
 }
 
 
-
-
 	/* playlistItems and setPlaylistItems are accessor methods for the playlistItems slot
 	on our object. */
-- (NSArray *)playlistItems {
-    return [[playlistItems retain] autorelease];
-}
-
-- (void)setPlaylistItems:(NSArray *)newPlaylistItems {
-    if (playlistItems != newPlaylistItems) {
-        [playlistItems release];
-        playlistItems = [newPlaylistItems copy];
-    }
-}
+@synthesize playlistItems;
 
 
-
-
-	/* tracklistItems and setTracklistItems are accessor methods for the tracklistItems slot
+    /* tracklistItems and setTracklistItems are accessor methods for the tracklistItems slot
 	on our object. */
-- (NSArray *)tracklistItems {
-    return [[tracklistItems retain] autorelease];
-}
+@synthesize tracklistItems;
 
 - (void)setTracklistItems:(NSArray *)newTracklistItems {
     if (tracklistItems != newTracklistItems) {
@@ -393,39 +325,14 @@ SUCH DAMAGE.
 }
 
 
-
-
 	/* gongSound and setGongSound are accessor methods for the gongSound slot
 	on our object. */
-- (NSSound *)gongSound {
-    return [[gongSound retain] autorelease];
-}
-
-- (void)setGongSound:(NSSound *)newGongSound {
-    if (gongSound != newGongSound) {
-        [gongSound release];
-        gongSound = [newGongSound copy];
-    }
-}
-
-
+@synthesize gongSound;
 
 
 	/* imagesTable and setImagesTable are accessor methods for the imagesTable slot
 	on our object. */
-- (NSArray *)imagesTable {
-    return [[imagesTable retain] autorelease];
-}
-
-- (void)setImagesTable:(NSArray *)newImagesTable {
-    if (imagesTable != newImagesTable) {
-        [imagesTable release];
-        imagesTable = [newImagesTable copy];
-    }
-}
-
-
-
+@synthesize imagesTable;
 
 
 	/* The gong method is called when the user clicks on the gong button
@@ -435,15 +342,12 @@ SUCH DAMAGE.
 	on to the next track. */
 - (IBAction)gong:(id)sender {
 		/* play the gong sound */
-	[[self gongSound] play];
+	[self.gongSound play];
 		/* call the GongCurrentTrack handler */
-	[[self myScript] gongCurrentTrack];
+	[self.myScript gongCurrentTrack];
 		/* update the UI */
 	[self updatePlayerStatus];
 }
-
-
-
 
 
 	/* repeatsetting is called when the user clicks on the repeat button
@@ -458,24 +362,22 @@ SUCH DAMAGE.
 	if ( playlistRow != -1 ) {
 		
 			/* get the name of the currently selected playlist */
-		NSString* playlistName = [[self playlistItems] objectAtIndex:playlistRow];
+		NSString* playlistName = [self.playlistItems objectAtIndex:playlistRow];
 		int repeatSetting;
 		
 			/* call the GetPlaylistRepeat handler in the AppleScript to find out the current setting */
-		repeatSetting = [[self myScript] getRepeatForPlaylist: playlistName];
+		repeatSetting = [self.myScript getRepeatForPlaylist: playlistName];
 		
 			/* there are three possible settings, increment to the next one using modulo arithmetic */
 		repeatSetting = (repeatSetting + 1) % 3;
 				
 			/* call the SetPlaylistRepeat AppleScript handler to set the new repeat setting */
-		[[self myScript] setRepeat:repeatSetting forPlaylist:playlistName];
+		[self.myScript setRepeat:repeatSetting forPlaylist:playlistName];
 		
 			/* update the button's image to display the new setting in the ui. */
-		[repeatbutton setImage:[[self imagesTable] objectAtIndex:(kRepeatOffImage + repeatSetting)]];
+		[repeatbutton setImage:[self.imagesTable objectAtIndex:(kRepeatOffImage + repeatSetting)]];
 	}
 }
-
-
 
 
 	/* shufflesetting is called when the user clicks on the shuffle button.  In this routine
@@ -490,25 +392,22 @@ SUCH DAMAGE.
 		int shuffleSetting;
 	
 			/* get the name of the currently selected playlist */
-		NSString* playlistName = [[self playlistItems] objectAtIndex:playlistRow];
+		NSString* playlistName = [self.playlistItems objectAtIndex:playlistRow];
 		
 			/* call the AppleScript handler GetPlaylistShuffle to retrieve the current
 			shuffle setting for the named playlist. */
-		shuffleSetting = [[self myScript] getShuffleForPlaylist:playlistName];
+		shuffleSetting = [self.myScript getShuffleForPlaylist:playlistName];
 		
 			/* increment the shuffle setting to the next position using module arithmetic. */
 		shuffleSetting = (shuffleSetting + 1) % 2;
 		
 			/* call the AppleScript SetPlaylistShuffle handler to set the new shuffle setting. */
-		[[self myScript] setShuffle:shuffleSetting forPlaylist:playlistName];
+		[self.myScript setShuffle:shuffleSetting forPlaylist:playlistName];
 		
 			/* update the shuffle button's image to reflect the new setting */
-		[shufflebutton setImage:[[self imagesTable] objectAtIndex:(kShuffleOffImage+shuffleSetting)]];
+		[shufflebutton setImage:[self.imagesTable objectAtIndex:(kShuffleOffImage+shuffleSetting)]];
 	}
 }
-
-
-
 
 
 	/* adjustvolume: is called whenever the volume slider is activated by
@@ -519,39 +418,31 @@ SUCH DAMAGE.
 - (IBAction)adjustvolume:(id)sender {
 	
 		/* Call the AppleScript SetRemoteVolume handler to change the volume setting */
-	[[self myScript] setRemoteVolume: [volumesetting intValue]];
+	[self.myScript setRemoteVolume: [volumesetting intValue]];
 	
 }
-
-
-
 
 
 	/* goback is called whenever the user clicks on the on the go back button. */
 - (IBAction)goback:(id)sender {	
 	
 		/* call the GoToPreviousTrack AppleScript handler */
-	[[self myScript] goToPreviousTrack];
+	[self.myScript goToPreviousTrack];
 	
 		/* update the ui to reflect the new player status. */
 	[self updatePlayerStatus];
 }
-
-
-
 
 
 	/* goback is called whenever the user clicks on the on the skip ahead button. */
 - (IBAction)goforward:(id)sender {
 	
 		/* call the GoToNextTrack AppleScript handler */
-	[[self myScript] goToNextTrack];
+	[self.myScript goToNextTrack];
 	
 		/* update the ui to reflect the new player status. */
 	[self updatePlayerStatus];
 }
-
-
 
 
 	/* playpause is called whenever the user clicks on the play button.  This routine
@@ -560,13 +451,13 @@ SUCH DAMAGE.
 	BOOL nextPlayerState;
 		
 		/* call ReportRemotePlayerState to find out if the remote player is playing */
-	RemotePlayerState* playerInfo = [[self myScript] getRemotePlayerState];
+	RemotePlayerState* playerInfo = [self.myScript getRemotePlayerState];
 		
 		/* increment the player state to it's next position using modulo arithmetic */
-	nextPlayerState = ! [playerInfo isPlaying];
+	nextPlayerState = ! playerInfo.isPlaying;
 		
 		/* call the SwitchRemotePlayerState AppleScript handler to set the new player state */
-	[[self myScript] setRemotePlayerState: nextPlayerState];
+	[self.myScript setRemotePlayerState: nextPlayerState];
 		
 		/* update the ui to reflect the new settings */
 	[self updatePlayerStatus];
